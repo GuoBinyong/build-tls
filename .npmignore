@@ -1,5 +1,5 @@
 # npm 上传包时的忽略配置文件
-# https://github.com/GuoBinyong/build-tls
+# https://github.com/GuoBinyong/library-webpack-template
 
 # 构建配置相关
 tsconfig.json
@@ -9,12 +9,6 @@ tsconfig.json
 .editorconfig
 .travis.yml
 rollup.config.js
-vite.config.js
-api-extractor.json
-/config/
-/temp/
-/scripts/
-/script/
 
 
 
@@ -31,4 +25,3 @@ api-extractor.json
 
 # 代码目录
 test/
-/demo/

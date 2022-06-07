@@ -2,9 +2,9 @@
   "name": "build-tls",
   "version": "0.0.0",
   "description": "build-tls 提供了库、项目 构建时常用的工具、函数等",
-  "main": "dist/build-tls.umd.js",
+  "main": "dist/build-tls.cjs.js",
   "module": "dist/build-tls.es.js",
-  "types": "dist/index.d.ts",
+  "types": "types/index.d.ts",
   "sideEffects": false,
   "homepage": "https://github.com/GuoBinyong/build-tls#readme",
   "repository": {
@@ -36,21 +36,29 @@
     "doc/[^.]*"
   ],
   "scripts": {
-    "dev": "vite",
-    "build": "vite build && tsc  --emitDeclarationOnly",
-    "stage": "vite build --mode stage && tsc  --emitDeclarationOnly",
-    "preview": "vite preview",
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "test": "node test/index.js",
+    "pretest": "npm run build",
     "api": "api-extractor run -c api-extractor.jsonc -l -v",
     "doc": "npm run api ; api-documenter markdown -i ./temp -o doc"
   },
   "devDependencies": {
-    "@microsoft/api-documenter": "^7.17.15",
-    "@microsoft/api-extractor": "^7.24.1",
+    "@microsoft/api-documenter": "^7.17.16",
+    "@microsoft/api-extractor": "^7.24.2",
+    "@rollup/plugin-commonjs": "^17.0.0",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^11.0.1",
+    "@rollup/plugin-typescript": "^8.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.10.0",
+    "@typescript-eslint/parser": "^4.10.0",
+    "eslint": "^7.15.0",
     "package-tls": "^1.2.2",
-    "typescript": "^4.5.4",
-    "vite": "^2.9.9"
-  },
-  "dependencies": {
-    "@types/node": "^17.0.40"
+    "path": "^0.12.7",
+    "rollup": "^2.35.1",
+    "rollup-plugin-terser": "^7.0.2",
+    "ts-node": "^9.1.1",
+    "tslib": "^2.0.3",
+    "typescript": "^4.1.3"
   }
 }
