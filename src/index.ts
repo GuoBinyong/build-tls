@@ -8,8 +8,8 @@
  */
 
 
- import {cp} from "fs/promises"
- import {extname} from "path"
+ import {cp} from "node:fs/promises"
+ import {extname} from "node:path"
  
  
  /**
