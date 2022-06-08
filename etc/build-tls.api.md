@@ -11,4 +11,14 @@ import { cp } from 'node:fs/promises';
 // @public
 export const copy_d_ts: typeof cp;
 
+// @public
+export function generate_d_ts(src: string, dest: string, options?: Generate_D_TS_Options | null): Promise<unknown>;
+
+// @public
+export interface Generate_D_TS_Options {
+    comArg?: string | null;
+    copyDTS?: boolean | null;
+    onExit?: boolean | null;
+}
+
 ```

@@ -10,6 +10,18 @@
 
 本库封装了前端构建时常用的工具、函数等
 
+## Functions
+
+|  Function | Description |
+|  --- | --- |
+|  [generate\_d\_ts(src, dest, options)](./build-tls.generate_d_ts.md) | 生成 TypeScript 类型声明文件 |
+
+## Interfaces
+
+|  Interface | Description |
+|  --- | --- |
+|  [Generate\_D\_TS\_Options](./build-tls.generate_d_ts_options.md) | generate\_d\_ts 的选项 |
+
 ## Variables
 
 |  Variable | Description |
