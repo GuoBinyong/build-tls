@@ -112,7 +112,7 @@ export function generate_d_ts(src:string,dest:string,options?:Generate_D_TS_Opti
         }
     
         const tscPro = new Promise((resolve, reject) =>{
-            const comd = `npx tsc --emitDeclarationOnly --outDir ${dest} ${comArg}`;
+            const comd = `npx tsc --emitDeclarationOnly --declarationDir ${dest} ${comArg}`;
             exec(comd,function(err,stdout,stderr){
                 if (err) {
                     console.error(`${logPrefix}: 错误: ${stderr}`);
