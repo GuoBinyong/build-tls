@@ -11,6 +11,9 @@
  import {cp} from "node:fs/promises"
  import {extname} from "node:path"
  
+
+ const logPrefix = "build-tls"; //日志前缀
+
  
  /**
   * TypeScript类型声明文件的过滤函数
@@ -18,14 +21,15 @@
   * @internal
   */
  function d_ts_filter(path: string) {
-     return /.d.ts$/.test(path) || extname(path).length === 0
+     return /.d.ts$/.test(path) || extname(path).length === 0;
  }
  
  
  /**
   * 拷贝 TypeScript 的类型声明文件
   * @remarks
-  * 将 源目录 中 TypeScript 类型声明文件 拷贝到 目标目录下
+  * 将 源目录 中 TypeScript 类型声明文件 拷贝到 目标目录下。
+  * 如果源目录下的子目录中没有 类型声明文件，则也会在目标目录下创建空的文件夹。
   * 
   * @param src - 源目录
   * @param dest - 目标目录
@@ -54,11 +58,15 @@ export interface Generate_D_TS_Options {
 
     /**
      * 是否拷贝项目中已有的 `.d.ts` 文件
+     * 
+     * @defaultValue true
      */
     copyDTS?:boolean|null;
 
     /**
      * 传给 `tsc` 命令的选项
+     * 
+     * @defaultValue ""
      */
     comArg?:string|null;
 
@@ -76,6 +84,8 @@ export interface Generate_D_TS_Options {
  * @remarks
  * 通过 tsc 命令生成 TypeScript 类型声明文件，并且可以拷贝 源目录下的  `.d.ts` 文件到输出目录中。
  * 
+ * 如果源目录下的子目录中没有 类型声明文件，则也会在目标目录下创建空的文件夹。
+ * 
  * 注意：tsc 命令本身不会拷贝项目中已有的 `.d.ts` 文件。
  * 
  * @param src - 源目录
@@ -84,22 +94,31 @@ export interface Generate_D_TS_Options {
  * @returns 操作完成的 Promise
  */
 export function generate_d_ts(src:string,dest:string,options?:Generate_D_TS_Options|null){
-    const {copyDTS,comArg,onExit = true} = options ?? {};
-    const comArgStr = comArg || "";
+    let {copyDTS,comArg,onExit} = options ?? {};
+    comArg = comArg || "";
+    copyDTS = copyDTS ?? true;
+    onExit = onExit ?? true;
 
     function generate(){
         let copyPro = Promise.resolve();
         if (copyDTS){
-            copyPro =  copy_d_ts(src,dest);
+            copyPro =  copy_d_ts(src,dest).then(function(result){
+                console.log(`${logPrefix}: .d.ts 文件拷贝完成`);
+                return result;
+            },function(err){
+                console.log(`${logPrefix}: .d.ts 文件拷贝出错`,err);
+                throw err;
+            });
         }
     
         const tscPro = new Promise((resolve, reject) =>{
-            exec(`npx tsc --emitDeclarationOnly --outDir ${dest} ${comArgStr}`,function(err,stdout,stderr){
+            const comd = `npx tsc --emitDeclarationOnly --outDir ${dest} ${comArg}`;
+            exec(comd,function(err,stdout,stderr){
                 if (err) {
-                    console.error(stderr);
+                    console.error(`${logPrefix}: 错误: ${stderr}`);
                     reject(err);
                 }else{
-                    console.log(stdout);
+                    console.log(`${logPrefix}: 已完成命令：${comd}`);
                     resolve(stdout);
                 }
             });
