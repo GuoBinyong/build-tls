@@ -24,6 +24,17 @@
      return /.d.ts$/.test(path) || extname(path).length === 0;
  }
  
+
+ export type CopyOptions = NonNullable<Parameters<typeof cp>[2]> & {
+    /**
+     * 需要排除的文件或目录名字
+     * 
+     * @remarks
+     * 如果 指定了 filter 选项，则 exclude 无效
+     */
+    exclude?:string[]|null
+}
+ 
  
  /**
   * 拷贝 TypeScript 的类型声明文件
@@ -35,11 +46,19 @@
   * @param dest - 目标目录
   * @param options - 选项
   */
- export const copy_d_ts:typeof cp = function copyTSDeclarationFiles(src,dest,options) {
+ export function copy_d_ts(src:string,dest:string,options?:CopyOptions) {
+    const exclude = options?.exclude || [];
      return cp(src,dest,{
          recursive:true,
          force:true,
-         filter:d_ts_filter,
+         filter:function(path){
+            const isEsclude = exclude.some(function(exc){
+                return path.endsWith(exc);
+            });
+
+            if (isEsclude) return false;
+           return  d_ts_filter.call(this,path);
+         },
          ...options
      });
  }
@@ -61,7 +80,7 @@ export interface Generate_D_TS_Options {
      * 
      * @defaultValue true
      */
-    copyDTS?:boolean|null;
+    copyDTS?:boolean|null|CopyOptions;
 
     /**
      * 传给 `tsc` 命令的选项
@@ -102,7 +121,8 @@ export function generate_d_ts(src:string,dest:string,options?:Generate_D_TS_Opti
     function generate(){
         let copyPro = Promise.resolve();
         if (copyDTS){
-            copyPro =  copy_d_ts(src,dest).then(function(result){
+            const copyOpts = typeof copyDTS === "object" ? copyDTS : {};
+            copyPro =  copy_d_ts(src,dest,copyOpts).then(function(result){
                 console.log(`${logPrefix}: .d.ts 文件拷贝完成`);
                 return result;
             },function(err){

@@ -8,6 +8,15 @@
  */
 /// <reference types="node" />
 import { cp } from "node:fs/promises";
+export declare type CopyOptions = NonNullable<Parameters<typeof cp>[2]> & {
+    /**
+     * 需要排除的文件或目录名字
+     *
+     * @remarks
+     * 如果 指定了 filter 选项，则 exclude 无效
+     */
+    exclude?: string[] | null;
+};
 /**
  * 拷贝 TypeScript 的类型声明文件
  * @remarks
@@ -18,7 +27,7 @@ import { cp } from "node:fs/promises";
  * @param dest - 目标目录
  * @param options - 选项
  */
-export declare const copy_d_ts: typeof cp;
+export declare function copy_d_ts(src: string, dest: string, options?: CopyOptions): Promise<void>;
 /**
  * generate_d_ts 的选项
  */
@@ -28,7 +37,7 @@ export interface Generate_D_TS_Options {
      *
      * @defaultValue true
      */
-    copyDTS?: boolean | null;
+    copyDTS?: boolean | null | CopyOptions;
     /**
      * 传给 `tsc` 命令的选项
      *
