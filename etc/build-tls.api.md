@@ -9,7 +9,12 @@
 import { cp } from 'node:fs/promises';
 
 // @public
-export const copy_d_ts: typeof cp;
+export function copy_d_ts(src: string, dest: string, options?: CopyOptions): Promise<void>;
+
+// @public (undocumented)
+export type CopyOptions = NonNullable<Parameters<typeof cp>[2]> & {
+    exclude?: string[] | null;
+};
 
 // @public
 export function generate_d_ts(src: string, dest: string, options?: Generate_D_TS_Options | null): Promise<unknown>;
@@ -17,7 +22,7 @@ export function generate_d_ts(src: string, dest: string, options?: Generate_D_TS
 // @public
 export interface Generate_D_TS_Options {
     comArg?: string | null;
-    copyDTS?: boolean | null;
+    copyDTS?: boolean | null | CopyOptions;
     onExit?: boolean | null;
 }
 

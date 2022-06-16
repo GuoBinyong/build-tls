@@ -14,6 +14,7 @@
 
 |  Function | Description |
 |  --- | --- |
+|  [copy\_d\_ts(src, dest, options)](./build-tls.copy_d_ts.md) | 拷贝 TypeScript 的类型声明文件 |
 |  [generate\_d\_ts(src, dest, options)](./build-tls.generate_d_ts.md) | 生成 TypeScript 类型声明文件 |
 
 ## Interfaces
@@ -22,9 +23,9 @@
 |  --- | --- |
 |  [Generate\_D\_TS\_Options](./build-tls.generate_d_ts_options.md) | generate\_d\_ts 的选项 |
 
-## Variables
+## Type Aliases
 
-|  Variable | Description |
+|  Type Alias | Description |
 |  --- | --- |
-|  [copy\_d\_ts](./build-tls.copy_d_ts.md) | 拷贝 TypeScript 的类型声明文件 |
+|  [CopyOptions](./build-tls.copyoptions.md) |  |
 

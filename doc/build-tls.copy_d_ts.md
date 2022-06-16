@@ -2,15 +2,27 @@
 
 [Home](./index.md) &gt; [build-tls](./build-tls.md) &gt; [copy\_d\_ts](./build-tls.copy_d_ts.md)
 
-## copy\_d\_ts variable
+## copy\_d\_ts() function
 
 拷贝 TypeScript 的类型声明文件
 
 <b>Signature:</b>
 
 ```typescript
-copy_d_ts: typeof cp
+export declare function copy_d_ts(src: string, dest: string, options?: CopyOptions): Promise<void>;
 ```
+
+## Parameters
+
+|  Parameter | Type | Description |
+|  --- | --- | --- |
+|  src | string | 源目录 |
+|  dest | string | 目标目录 |
+|  options | [CopyOptions](./build-tls.copyoptions.md) | <i>(Optional)</i> 选项 |
+
+<b>Returns:</b>
+
+Promise&lt;void&gt;
 
 ## Remarks
 

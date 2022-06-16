@@ -9,5 +9,5 @@
 <b>Signature:</b>
 
 ```typescript
-copyDTS?: boolean | null;
+copyDTS?: boolean | null | CopyOptions;
 ```
