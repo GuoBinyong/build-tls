@@ -136,9 +136,11 @@ export function generate_d_ts(src:string,dest:string,options?:Generate_D_TS_Opti
             exec(comd,function(err,stdout,stderr){
                 if (err) {
                     console.error(`${logPrefix}: 错误: ${stderr}`);
+                    console.error(stdout);
                     reject(err);
                 }else{
                     console.log(`${logPrefix}: 已完成命令：${comd}`);
+                    console.log(stdout);
                     resolve(stdout);
                 }
             });
