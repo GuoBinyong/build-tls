@@ -6,6 +6,9 @@
   "module": "dist/build-tls.es.js",
   "types": "types/index.d.ts",
   "sideEffects": false,
+  "engines": {
+    "node": ">=16.7.0"
+  },
   "homepage": "https://github.com/GuoBinyong/build-tls#readme",
   "repository": {
     "type": "git",
