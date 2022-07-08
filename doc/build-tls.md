@@ -16,6 +16,9 @@
 |  --- | --- |
 |  [copy\_d\_ts(src, dest, options)](./build-tls.copy_d_ts.md) | 拷贝 TypeScript 的类型声明文件 |
 |  [generate\_d\_ts(src, dest, options)](./build-tls.generate_d_ts.md) | 生成 TypeScript 类型声明文件 |
+|  [onBeforeExit()](./build-tls.onbeforeexit.md) | 在退出之前执行 |
+|  [removePath(path)](./build-tls.removepath.md) | 移除目标 |
+|  [tsc\_d\_ts(dest, comArg)](./build-tls.tsc_d_ts.md) | 使用 tsc 生成 类型声明文件 |
 
 ## Interfaces
 

@@ -9,7 +9,7 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function generate_d_ts(src: string, dest: string, options?: Generate_D_TS_Options | null): Promise<unknown>;
+export declare function generate_d_ts(src: string, dest: string, options?: Generate_D_TS_Options | null): Promise<unknown[]>;
 ```
 
 ## Parameters
@@ -22,7 +22,7 @@ export declare function generate_d_ts(src: string, dest: string, options?: Gener
 
 <b>Returns:</b>
 
-Promise&lt;unknown&gt;
+Promise&lt;unknown\[\]&gt;
 
 操作完成的 Promise
 

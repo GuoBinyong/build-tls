@@ -372,6 +372,32 @@
             },
             {
               "kind": "PropertySignature",
+              "canonicalReference": "build-tls!Generate_D_TS_Options#emptyOutDir:member",
+              "docComment": "/**\n * 是否清空输出目录\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "emptyOutDir?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean | null"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "emptyOutDir",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
               "canonicalReference": "build-tls!Generate_D_TS_Options#onExit:member",
               "docComment": "/**\n * 是否要在当前进程将要退出时执行\n *\n * @defaultValue\n *\n * true\n */\n",
               "excerptTokens": [
@@ -444,7 +470,7 @@
             },
             {
               "kind": "Content",
-              "text": "<unknown>"
+              "text": "<unknown[]>"
             },
             {
               "kind": "Content",
@@ -484,6 +510,152 @@
             }
           ],
           "name": "generate_d_ts"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "build-tls!onBeforeExit:function(1)",
+          "docComment": "/**\n * 在退出之前执行\n *\n * @returns \n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function onBeforeExit(): "
+            },
+            {
+              "kind": "Reference",
+              "text": "Promise",
+              "canonicalReference": "!Promise:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<void>"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 3
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [],
+          "name": "onBeforeExit"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "build-tls!removePath:function(1)",
+          "docComment": "/**\n * 移除目标\n *\n * @param path - 被移除的文件或文件夹的路径\n *\n * @returns \n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function removePath(path: "
+            },
+            {
+              "kind": "Content",
+              "text": "string"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "Promise",
+              "canonicalReference": "!Promise:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<void>"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 3,
+            "endIndex": 5
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "path",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": false
+            }
+          ],
+          "name": "removePath"
+        },
+        {
+          "kind": "Function",
+          "canonicalReference": "build-tls!tsc_d_ts:function(1)",
+          "docComment": "/**\n * 使用 tsc 生成 类型声明文件\n *\n * @param dest - 输出目录\n *\n * @param comArg - 命令行选项\n *\n * @returns \n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare function tsc_d_ts(dest: "
+            },
+            {
+              "kind": "Content",
+              "text": "string"
+            },
+            {
+              "kind": "Content",
+              "text": ", comArg?: "
+            },
+            {
+              "kind": "Content",
+              "text": "string | null | undefined"
+            },
+            {
+              "kind": "Content",
+              "text": "): "
+            },
+            {
+              "kind": "Reference",
+              "text": "Promise",
+              "canonicalReference": "!Promise:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "<unknown>"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "returnTypeTokenRange": {
+            "startIndex": 5,
+            "endIndex": 7
+          },
+          "releaseTag": "Public",
+          "overloadIndex": 1,
+          "parameters": [
+            {
+              "parameterName": "dest",
+              "parameterTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              },
+              "isOptional": false
+            },
+            {
+              "parameterName": "comArg",
+              "parameterTypeTokenRange": {
+                "startIndex": 3,
+                "endIndex": 4
+              },
+              "isOptional": true
+            }
+          ],
+          "name": "tsc_d_ts"
         }
       ]
     }

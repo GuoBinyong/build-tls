@@ -50,6 +50,10 @@ export interface Generate_D_TS_Options {
      * @defaultValue true
      */
     onExit?: boolean | null;
+    /**
+     * 是否清空输出目录
+     */
+    emptyOutDir?: boolean | null;
 }
 /**
  * 生成 TypeScript 类型声明文件
@@ -65,4 +69,22 @@ export interface Generate_D_TS_Options {
  * @param options - 选项
  * @returns 操作完成的 Promise
  */
-export declare function generate_d_ts(src: string, dest: string, options?: Generate_D_TS_Options | null): Promise<unknown>;
+export declare function generate_d_ts(src: string, dest: string, options?: Generate_D_TS_Options | null): Promise<unknown[]>;
+/**
+ * 使用 tsc 生成 类型声明文件
+ * @param dest - 输出目录
+ * @param comArg - 命令行选项
+ * @returns
+ */
+export declare function tsc_d_ts(dest: string, comArg?: string | null | undefined): Promise<unknown>;
+/**
+ * 在退出之前执行
+ * @returns
+ */
+export declare function onBeforeExit(): Promise<void>;
+/**
+ * 移除目标
+ * @param path - 被移除的文件或文件夹的路径
+ * @returns
+ */
+export declare function removePath(path: string): Promise<void>;

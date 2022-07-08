@@ -8,7 +8,7 @@
  */
 
 
- import {cp} from "node:fs/promises"
+ import {cp,rm} from "node:fs/promises"
  import {extname} from "node:path"
  
 
@@ -60,7 +60,13 @@
            return  d_ts_filter.call(this,path);
          },
          ...options
-     });
+     }).then(function(result){
+        console.log(`${logPrefix}: .d.ts 文件拷贝完成`);
+        return result;
+    },function(err){
+        console.log(`${logPrefix}: .d.ts 文件拷贝出错`,err);
+        throw err;
+    });
  }
 
 
@@ -95,6 +101,10 @@ export interface Generate_D_TS_Options {
      * @defaultValue true
      */
     onExit?:boolean|null;
+    /**
+     * 是否清空输出目录
+     */
+    emptyOutDir?:boolean|null;
 }
 
 
@@ -113,57 +123,89 @@ export interface Generate_D_TS_Options {
  * @returns 操作完成的 Promise
  */
 export function generate_d_ts(src:string,dest:string,options?:Generate_D_TS_Options|null){
-    let {copyDTS,comArg,onExit} = options ?? {};
-    comArg = comArg || "";
+    options = options ?? {};
+    let {copyDTS,onExit} = options;
     copyDTS = copyDTS ?? true;
     onExit = onExit ?? true;
+    const {emptyOutDir,comArg} = options;
 
-    function generate(){
-        let copyPro = Promise.resolve();
+    async function generate(){
+        if (emptyOutDir){
+            await removePath(dest);
+        }
+
+        const allPro = [];
         if (copyDTS){
             const copyOpts = typeof copyDTS === "object" ? copyDTS : {};
-            copyPro =  copy_d_ts(src,dest,copyOpts).then(function(result){
-                console.log(`${logPrefix}: .d.ts 文件拷贝完成`);
-                return result;
-            },function(err){
-                console.log(`${logPrefix}: .d.ts 文件拷贝出错`,err);
-                throw err;
-            });
+            allPro.push( copy_d_ts(src,dest,copyOpts) );
         }
-    
-        const tscPro = new Promise((resolve, reject) =>{
-            const comd = `npx tsc --emitDeclarationOnly --declarationDir ${dest} ${comArg}`;
-            exec(comd,function(err,stdout,stderr){
-                if (err) {
-                    console.error(`${logPrefix}: 错误: ${stderr}`);
-                    console.error(stdout);
-                    reject(err);
-                }else{
-                    console.log(`${logPrefix}: 已完成命令：${comd}`);
-                    console.log(stdout);
-                    resolve(stdout);
-                }
-            });
-        });
-    
-       return Promise.all([copyPro,tscPro]);
+
+        allPro.push(tsc_d_ts(dest,comArg));    
+        return Promise.all(allPro);
     }
 
 
     if (onExit){
-       return new Promise(function (resolve){
-            process.on("beforeExit",()=>{
-                if ((process as any).hasGenerated_d_ts){
-                    return resolve(null);
-                }
-                resolve(generate());
-                (process as any).hasGenerated_d_ts = true;
-            });
-        });
-
+        return onBeforeExit().then(generate);
     }else{
         return generate();
     }
 
-  
+}
+
+
+
+/**
+ * 使用 tsc 生成 类型声明文件
+ * @param dest - 输出目录
+ * @param comArg - 命令行选项
+ * @returns 
+ */
+export function tsc_d_ts(dest:string, comArg?:string|null|undefined){
+    comArg = comArg || "";
+    return new Promise((resolve, reject) =>{
+        const comd = `npx tsc --emitDeclarationOnly --declarationDir ${dest} ${comArg}`;
+        exec(comd,function(err,stdout,stderr){
+            if (err) {
+                console.error(`${logPrefix}: 错误: ${stderr}`);
+                console.error(stdout);
+                reject(err);
+            }else{
+                console.log(`${logPrefix}: 已完成命令：${comd}`);
+                console.log(stdout);
+                resolve(stdout);
+            }
+        });
+    });
+}
+
+
+
+
+/**
+ * 在退出之前执行
+ * @returns 
+ */
+export function onBeforeExit(){
+    return new Promise<void>(function (resolve){
+        const listener = ()=>{
+            process.off("beforeExit",listener);
+            resolve();
+        };
+        process.on("beforeExit",listener);
+    });
+}
+
+
+
+
+
+
+/**
+ * 移除目标
+ * @param path - 被移除的文件或文件夹的路径
+ * @returns 
+ */
+export function removePath(path:string) {
+    return rm(path,{force:true,recursive:true});
 }

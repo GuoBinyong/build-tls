@@ -17,13 +17,23 @@ export type CopyOptions = NonNullable<Parameters<typeof cp>[2]> & {
 };
 
 // @public
-export function generate_d_ts(src: string, dest: string, options?: Generate_D_TS_Options | null): Promise<unknown>;
+export function generate_d_ts(src: string, dest: string, options?: Generate_D_TS_Options | null): Promise<unknown[]>;
 
 // @public
 export interface Generate_D_TS_Options {
     comArg?: string | null;
     copyDTS?: boolean | null | CopyOptions;
+    emptyOutDir?: boolean | null;
     onExit?: boolean | null;
 }
+
+// @public
+export function onBeforeExit(): Promise<void>;
+
+// @public
+export function removePath(path: string): Promise<void>;
+
+// @public
+export function tsc_d_ts(dest: string, comArg?: string | null | undefined): Promise<unknown>;
 
 ```
