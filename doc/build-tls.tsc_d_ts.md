@@ -9,15 +9,15 @@
 <b>Signature:</b>
 
 ```typescript
-export declare function tsc_d_ts(dest: string, comArg?: string | null | undefined): Promise<unknown>;
+export declare function tsc_d_ts(dist: string, options?: Tsc_d_ts_Options | null): Promise<unknown>;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  dest | string | 输出目录 |
-|  comArg | string \| null \| undefined | <i>(Optional)</i> 命令行选项 |
+|  dist | string |  |
+|  options | [Tsc\_d\_ts\_Options](./build-tls.tsc_d_ts_options.md) \| null | <i>(Optional)</i> 选项 |
 
 <b>Returns:</b>
 

@@ -18,13 +18,14 @@
 |  [generate\_d\_ts(src, dest, options)](./build-tls.generate_d_ts.md) | 生成 TypeScript 类型声明文件 |
 |  [onBeforeExit()](./build-tls.onbeforeexit.md) | 在退出之前执行 |
 |  [removePath(path)](./build-tls.removepath.md) | 移除目标 |
-|  [tsc\_d\_ts(dest, comArg)](./build-tls.tsc_d_ts.md) | 使用 tsc 生成 类型声明文件 |
+|  [tsc\_d\_ts(dist, options)](./build-tls.tsc_d_ts.md) | 使用 tsc 生成 类型声明文件 |
 
 ## Interfaces
 
 |  Interface | Description |
 |  --- | --- |
 |  [Generate\_D\_TS\_Options](./build-tls.generate_d_ts_options.md) | generate\_d\_ts 的选项 |
+|  [Tsc\_d\_ts\_Options](./build-tls.tsc_d_ts_options.md) | tsc\_d\_ts 的选项 |
 
 ## Type Aliases
 
