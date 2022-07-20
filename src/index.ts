@@ -9,7 +9,7 @@
 
 
  import {cp,rm} from "node:fs/promises"
- import {extname} from "node:path"
+ import {extname,join} from "node:path"
  
 
  const logPrefix = "build-tls"; //日志前缀
@@ -79,8 +79,7 @@ import process from "node:process"
 /**
  * generate_d_ts 的选项
  */
-export interface Generate_D_TS_Options {
-
+export interface Generate_D_TS_Options extends Tsc_d_ts_Options {
     /**
      * 是否拷贝项目中已有的 `.d.ts` 文件
      * 
@@ -88,12 +87,6 @@ export interface Generate_D_TS_Options {
      */
     copyDTS?:boolean|null|CopyOptions;
 
-    /**
-     * 传给 `tsc` 命令的选项
-     * 
-     * @defaultValue ""
-     */
-    comArg?:string|null;
 
     /**
      * 是否要在当前进程将要退出时执行
@@ -127,7 +120,7 @@ export function generate_d_ts(src:string,dest:string,options?:Generate_D_TS_Opti
     let {copyDTS,onExit} = options;
     copyDTS = copyDTS ?? true;
     onExit = onExit ?? true;
-    const {emptyOutDir,comArg} = options;
+    const {emptyOutDir} = options;
 
     async function generate(){
         if (emptyOutDir){
@@ -140,7 +133,7 @@ export function generate_d_ts(src:string,dest:string,options?:Generate_D_TS_Opti
             allPro.push( copy_d_ts(src,dest,copyOpts) );
         }
 
-        allPro.push(tsc_d_ts(dest,comArg));    
+        allPro.push(tsc_d_ts(dest,options));    
         return Promise.all(allPro);
     }
 
@@ -153,18 +146,51 @@ export function generate_d_ts(src:string,dest:string,options?:Generate_D_TS_Opti
 
 }
 
+/**
+ * tsc_d_ts 的选项
+ */
+export interface Tsc_d_ts_Options {
+    /**
+     * 作为单一输出文件的名字
+     * @remarks
+     * 会放在输出目录下
+     */
+    outFile?:string|null;
+
+    /**
+     * 传给 `tsc` 命令的选项
+     * 
+     * @defaultValue ""
+     */
+     comArg?:string|null;
+}
 
 
 /**
  * 使用 tsc 生成 类型声明文件
  * @param dest - 输出目录
- * @param comArg - 命令行选项
+ * @param options - 选项
  * @returns 
  */
-export function tsc_d_ts(dest:string, comArg?:string|null|undefined){
-    comArg = comArg || "";
+export function tsc_d_ts(dist:string,options?:Tsc_d_ts_Options|null){
+    const {outFile,comArg} = options ?? {};
+
+    let comd = "npx tsc --emitDeclarationOnly";
+    
+    if (outFile){
+        dist = join(dist,outFile);
+        comd += `  --outFile ${dist}`;
+    }else{
+        comd += `  --declarationDir ${dist}`;
+    }
+
+    if (comArg){
+        comd += `  ${comArg}`;
+    }
+
+
     return new Promise((resolve, reject) =>{
-        const comd = `npx tsc --emitDeclarationOnly --declarationDir ${dest} ${comArg}`;
+        
         exec(comd,function(err,stdout,stderr){
             if (err) {
                 console.error(`${logPrefix}: 错误: ${stderr}`);
