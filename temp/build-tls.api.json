@@ -327,12 +327,12 @@
           "members": [
             {
               "kind": "PropertySignature",
-              "canonicalReference": "build-tls!DtsBundleOptions#entity:member",
+              "canonicalReference": "build-tls!DtsBundleOptions#entry:member",
               "docComment": "/**\n * 入口文件\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",
-                  "text": "entity?: "
+                  "text": "entry?: "
                 },
                 {
                   "kind": "Content",
@@ -346,7 +346,7 @@
               "isReadonly": false,
               "isOptional": true,
               "releaseTag": "Public",
-              "name": "entity",
+              "name": "entry",
               "propertyTypeTokenRange": {
                 "startIndex": 1,
                 "endIndex": 2

@@ -19,7 +19,7 @@ export type CopyOptions = NonNullable<Parameters<typeof cp>[2]> & {
 
 // @public (undocumented)
 export interface DtsBundleOptions extends LibrariesOptions {
-    entity?: string | null;
+    entry?: string | null;
 }
 
 // @public

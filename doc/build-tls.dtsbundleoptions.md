@@ -15,5 +15,5 @@ export interface DtsBundleOptions extends LibrariesOptions
 
 |  Property | Modifiers | Type | Description |
 |  --- | --- | --- | --- |
-|  [entity?](./build-tls.dtsbundleoptions.entity.md) |  | string \| null | <i>(Optional)</i> 入口文件 |
+|  [entry?](./build-tls.dtsbundleoptions.entry.md) |  | string \| null | <i>(Optional)</i> 入口文件 |
 

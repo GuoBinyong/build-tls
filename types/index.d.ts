@@ -93,7 +93,7 @@ export interface DtsBundleOptions extends LibrariesOptions {
     /**
      * 入口文件
      */
-    entity?: string | null;
+    entry?: string | null;
 }
 /**
  * 使用 tsc 生成 类型声明文件
