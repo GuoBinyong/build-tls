@@ -10,7 +10,7 @@
 
  import {cp,rm} from "node:fs/promises"
  import {extname,join} from "node:path"
- import type {LibrariesOptions} from "dts-bundle-generator"
+ import type {LibrariesOptions,OutputOptions,CompilationOptions} from "dts-bundle-generator"
 
  const logPrefix = "build-tls"; //日志前缀
 
@@ -180,7 +180,7 @@ export interface Tsc_d_ts_Options {
 }
 
 
-export interface DtsBundleOptions extends LibrariesOptions{
+export interface DtsBundleOptions extends LibrariesOptions,OutputOptions,CompilationOptions{
     /**
      * 入口文件
      */
