@@ -123,7 +123,7 @@ export function generate_d_ts(src:string,dest:string,options?:Generate_D_TS_Opti
     const {emptyOutDir,dtsBundle} = finalOpts;
     if (dtsBundle){
         const dtsBundleOpts = typeof dtsBundle === 'object' ? {...dtsBundle} : {} as DtsBundleOptions;
-        dtsBundleOpts.entity = dtsBundleOpts.entity ?? join(src,"index.ts");
+        dtsBundleOpts.entry = dtsBundleOpts.entry ?? join(src,"index.ts");
         finalOpts.dtsBundle = dtsBundleOpts;
     }
     async function generate(){
@@ -183,7 +183,7 @@ export interface DtsBundleOptions extends LibrariesOptions{
     /**
      * 入口文件
      */
-    entity?:string| null,
+    entry?:string| null,
 }
 
 
@@ -200,7 +200,7 @@ export function tsc_d_ts(dist:string,options?:Tsc_d_ts_Options|null){
     
     if (outFile){
         if (dtsBundle){
-            const {entity,inlinedLibraries,importedLibraries,allowedTypesLibraries} = (dtsBundle  || {}) as DtsBundleOptions;
+            const {entry: entity,inlinedLibraries,importedLibraries,allowedTypesLibraries} = (dtsBundle  || {}) as DtsBundleOptions;
             comd = `npx dts-bundle-generator`;
 
             if (entity){
