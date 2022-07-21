@@ -74,7 +74,7 @@ export interface Tsc_d_ts_Options {
      * @remarks
      * 会放在输出目录下
      */
-    outFile?: string | null;
+    outFile?: string | boolean | null;
     /**
      * 传给 `tsc` 命令的选项
      *
@@ -97,7 +97,7 @@ export interface DtsBundleOptions extends LibrariesOptions {
 }
 /**
  * 使用 tsc 生成 类型声明文件
- * @param dest - 输出目录
+ * @param dest - 输出目录或文件的路径，优先级低于 options.outFile
  * @param options - 选项
  * @returns
  */

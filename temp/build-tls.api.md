@@ -45,7 +45,7 @@ export function tsc_d_ts(dist: string, options?: Tsc_d_ts_Options | null): Promi
 export interface Tsc_d_ts_Options {
     comArg?: string | null;
     dtsBundle: DtsBundleOptions | boolean | null;
-    outFile?: string | null;
+    outFile?: string | boolean | null;
 }
 
 ```

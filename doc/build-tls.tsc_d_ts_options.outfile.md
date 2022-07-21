@@ -9,7 +9,7 @@
 <b>Signature:</b>
 
 ```typescript
-outFile?: string | null;
+outFile?: string | boolean | null;
 ```
 
 ## Remarks
