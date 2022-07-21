@@ -48,6 +48,7 @@
   */
  export function copy_d_ts(src:string,dest:string,options?:CopyOptions) {
     const exclude = options?.exclude || [];
+    console.log(`${logPrefix}: 开始拷贝 .d.ts 文件`);
      return cp(src,dest,{
          recursive:true,
          force:true,
@@ -64,7 +65,7 @@
         console.log(`${logPrefix}: .d.ts 文件拷贝完成`);
         return result;
     },function(err){
-        console.log(`${logPrefix}: .d.ts 文件拷贝出错`,err);
+        console.error(`${logPrefix}: .d.ts 文件拷贝出错`,err);
         throw err;
     });
  }
@@ -244,14 +245,15 @@ export function tsc_d_ts(dist:string,options?:Tsc_d_ts_Options|null){
 
     return new Promise((resolve, reject) =>{
         
+        console.log(`${logPrefix}: 执行命令：${comd}`);
         exec(comd,function(err,stdout,stderr){
+            console.log(`${logPrefix}: 命令已结束：${comd}`);
             if (err) {
                 console.error(`${logPrefix}: 错误: ${stderr}`);
                 console.error(stdout);
                 reject(err);
             }else{
-                console.log(`${logPrefix}: 已完成命令：${comd}`);
-                console.log(stdout);
+                console.log(`${logPrefix}: 完成: `,stdout);
                 resolve(stdout);
             }
         });
