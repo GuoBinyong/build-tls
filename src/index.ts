@@ -21,7 +21,7 @@
   * @internal
   */
  function d_ts_filter(path: string) {
-     return /.d.ts$/.test(path) || extname(path).length === 0;
+     return /\.d\.ts$/.test(path) || extname(path).length === 0;
  }
  
 
