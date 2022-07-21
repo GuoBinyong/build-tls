@@ -10,7 +10,7 @@
 
  import {cp,rm} from "node:fs/promises"
  import {extname,join} from "node:path"
- 
+ import type {LibrariesOptions} from "dts-bundle-generator"
 
  const logPrefix = "build-tls"; //日志前缀
 
@@ -116,12 +116,16 @@ export interface Generate_D_TS_Options extends Tsc_d_ts_Options {
  * @returns 操作完成的 Promise
  */
 export function generate_d_ts(src:string,dest:string,options?:Generate_D_TS_Options|null){
-    options = options ?? {};
-    let {copyDTS,onExit} = options;
+    const finalOpts = {...options} as Generate_D_TS_Options;
+    let {copyDTS,onExit} = finalOpts;
     copyDTS = copyDTS ?? true;
     onExit = onExit ?? true;
-    const {emptyOutDir} = options;
-
+    const {emptyOutDir,dtsBundle} = finalOpts;
+    if (dtsBundle){
+        const dtsBundleOpts = typeof dtsBundle === 'object' ? {...dtsBundle} : {} as DtsBundleOptions;
+        dtsBundleOpts.entity = dtsBundleOpts.entity ?? join(src,"index.ts");
+        finalOpts.dtsBundle = dtsBundleOpts;
+    }
     async function generate(){
         if (emptyOutDir){
             await removePath(dest);
@@ -133,7 +137,7 @@ export function generate_d_ts(src:string,dest:string,options?:Generate_D_TS_Opti
             allPro.push( copy_d_ts(src,dest,copyOpts) );
         }
 
-        allPro.push(tsc_d_ts(dest,options));    
+        allPro.push(tsc_d_ts(dest,finalOpts));    
         return Promise.all(allPro);
     }
 
@@ -163,6 +167,23 @@ export interface Tsc_d_ts_Options {
      * @defaultValue ""
      */
      comArg?:string|null;
+
+
+     /**
+      * dtsBundle 额外选项
+      * 
+      * @remarks
+      * 当此选项为真值时，会使用 dts-bundle-generator 来生成单个的类型声明文件
+      */
+     dtsBundle:DtsBundleOptions|boolean|null;
+}
+
+
+export interface DtsBundleOptions extends LibrariesOptions{
+    /**
+     * 入口文件
+     */
+    entity?:string| null,
 }
 
 
@@ -173,13 +194,38 @@ export interface Tsc_d_ts_Options {
  * @returns 
  */
 export function tsc_d_ts(dist:string,options?:Tsc_d_ts_Options|null){
-    const {outFile,comArg} = options ?? {};
+    const {outFile,comArg,dtsBundle} = options ?? {};
 
     let comd = "npx tsc --emitDeclarationOnly";
     
     if (outFile){
-        dist = join(dist,outFile);
-        comd += `  --outFile ${dist}`;
+        if (dtsBundle){
+            const {entity,inlinedLibraries,importedLibraries,allowedTypesLibraries} = (dtsBundle  || {}) as DtsBundleOptions;
+            comd = `npx dts-bundle-generator`;
+
+            if (entity){
+                comd += `  ${entity}`;
+            }
+
+            if (inlinedLibraries && inlinedLibraries.length > 0){
+                const inlineArgs = inlinedLibraries!.map(lib=> `  --external-inlines ${lib}`);
+                comd += inlineArgs.join(" ");
+            }
+
+            if (importedLibraries && importedLibraries.length > 0){
+                const inlineArgs = importedLibraries!.map(lib=> `  --external-imports ${lib}`);
+                comd += inlineArgs.join(" ");
+            }
+
+            if (allowedTypesLibraries && allowedTypesLibraries.length > 0){
+                const inlineArgs = allowedTypesLibraries!.map(lib=> `  --external-types ${lib}`);
+                comd += inlineArgs.join(" ");
+            }
+
+        }else{
+            dist = join(dist,outFile);
+            comd += `  --outFile ${dist}`;
+        }
     }else{
         comd += `  --declarationDir ${dist}`;
     }
