@@ -199,9 +199,10 @@ export function tsc_d_ts(dist:string,options?:Tsc_d_ts_Options|null){
     let comd = "npx tsc --emitDeclarationOnly";
     
     if (outFile){
+        const outFilePath = join(dist,outFile);
         if (dtsBundle){
             const {entry: entity,inlinedLibraries,importedLibraries,allowedTypesLibraries} = (dtsBundle  || {}) as DtsBundleOptions;
-            comd = `npx dts-bundle-generator`;
+            comd = `npx dts-bundle-generator --out-file ${outFilePath}`;
 
             if (entity){
                 comd += `  ${entity}`;
@@ -223,8 +224,7 @@ export function tsc_d_ts(dist:string,options?:Tsc_d_ts_Options|null){
             }
 
         }else{
-            dist = join(dist,outFile);
-            comd += `  --outFile ${dist}`;
+            comd += `  --outFile ${outFilePath}`;
         }
     }else{
         comd += `  --declarationDir ${dist}`;
