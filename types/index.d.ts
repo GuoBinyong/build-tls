@@ -8,6 +8,7 @@
  */
 /// <reference types="node" />
 import { cp } from "node:fs/promises";
+import type { LibrariesOptions } from "dts-bundle-generator";
 export declare type CopyOptions = NonNullable<Parameters<typeof cp>[2]> & {
     /**
      * 需要排除的文件或目录名字
@@ -80,6 +81,19 @@ export interface Tsc_d_ts_Options {
      * @defaultValue ""
      */
     comArg?: string | null;
+    /**
+     * dtsBundle 额外选项
+     *
+     * @remarks
+     * 当此选项为真值时，会使用 dts-bundle-generator 来生成单个的类型声明文件
+     */
+    dtsBundle: DtsBundleOptions | boolean | null;
+}
+export interface DtsBundleOptions extends LibrariesOptions {
+    /**
+     * 入口文件
+     */
+    entity?: string | null;
 }
 /**
  * 使用 tsc 生成 类型声明文件

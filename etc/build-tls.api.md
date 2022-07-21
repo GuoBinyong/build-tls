@@ -7,6 +7,7 @@
 /// <reference types="node" />
 
 import { cp } from 'node:fs/promises';
+import type { LibrariesOptions } from 'dts-bundle-generator';
 
 // @public
 export function copy_d_ts(src: string, dest: string, options?: CopyOptions): Promise<void>;
@@ -15,6 +16,11 @@ export function copy_d_ts(src: string, dest: string, options?: CopyOptions): Pro
 export type CopyOptions = NonNullable<Parameters<typeof cp>[2]> & {
     exclude?: string[] | null;
 };
+
+// @public (undocumented)
+export interface DtsBundleOptions extends LibrariesOptions {
+    entity?: string | null;
+}
 
 // @public
 export function generate_d_ts(src: string, dest: string, options?: Generate_D_TS_Options | null): Promise<unknown[]>;
@@ -38,6 +44,7 @@ export function tsc_d_ts(dist: string, options?: Tsc_d_ts_Options | null): Promi
 // @public
 export interface Tsc_d_ts_Options {
     comArg?: string | null;
+    dtsBundle: DtsBundleOptions | boolean | null;
     outFile?: string | null;
 }
 

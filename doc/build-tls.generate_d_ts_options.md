@@ -15,9 +15,9 @@ export interface Generate_D_TS_Options extends Tsc_d_ts_Options
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [copyDTS?](./build-tls.generate_d_ts_options.copydts.md) | boolean \| null \| [CopyOptions](./build-tls.copyoptions.md) | <i>(Optional)</i> 是否拷贝项目中已有的 <code>.d.ts</code> 文件 |
-|  [emptyOutDir?](./build-tls.generate_d_ts_options.emptyoutdir.md) | boolean \| null | <i>(Optional)</i> 是否清空输出目录 |
-|  [onExit?](./build-tls.generate_d_ts_options.onexit.md) | boolean \| null | <i>(Optional)</i> 是否要在当前进程将要退出时执行 |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [copyDTS?](./build-tls.generate_d_ts_options.copydts.md) |  | boolean \| null \| [CopyOptions](./build-tls.copyoptions.md) | <i>(Optional)</i> 是否拷贝项目中已有的 <code>.d.ts</code> 文件 |
+|  [emptyOutDir?](./build-tls.generate_d_ts_options.emptyoutdir.md) |  | boolean \| null | <i>(Optional)</i> 是否清空输出目录 |
+|  [onExit?](./build-tls.generate_d_ts_options.onexit.md) |  | boolean \| null | <i>(Optional)</i> 是否要在当前进程将要退出时执行 |
 

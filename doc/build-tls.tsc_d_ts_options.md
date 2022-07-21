@@ -14,8 +14,9 @@ export interface Tsc_d_ts_Options
 
 ## Properties
 
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [comArg?](./build-tls.tsc_d_ts_options.comarg.md) | string \| null | <i>(Optional)</i> 传给 <code>tsc</code> 命令的选项 |
-|  [outFile?](./build-tls.tsc_d_ts_options.outfile.md) | string \| null | <i>(Optional)</i> 作为单一输出文件的名字 |
+|  Property | Modifiers | Type | Description |
+|  --- | --- | --- | --- |
+|  [comArg?](./build-tls.tsc_d_ts_options.comarg.md) |  | string \| null | <i>(Optional)</i> 传给 <code>tsc</code> 命令的选项 |
+|  [dtsBundle](./build-tls.tsc_d_ts_options.dtsbundle.md) |  | [DtsBundleOptions](./build-tls.dtsbundleoptions.md) \| boolean \| null | dtsBundle 额外选项 |
+|  [outFile?](./build-tls.tsc_d_ts_options.outfile.md) |  | string \| null | <i>(Optional)</i> 作为单一输出文件的名字 |
 
