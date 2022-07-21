@@ -159,7 +159,7 @@ export interface Tsc_d_ts_Options {
      * @remarks
      * 会放在输出目录下
      */
-    outFile?:string|null;
+    outFile?:string|boolean|null;
 
     /**
      * 传给 `tsc` 命令的选项
@@ -189,7 +189,7 @@ export interface DtsBundleOptions extends LibrariesOptions{
 
 /**
  * 使用 tsc 生成 类型声明文件
- * @param dest - 输出目录
+ * @param dest - 输出目录或文件的路径，优先级低于 options.outFile 
  * @param options - 选项
  * @returns 
  */
@@ -199,14 +199,21 @@ export function tsc_d_ts(dist:string,options?:Tsc_d_ts_Options|null){
     let comd = "npx tsc --emitDeclarationOnly";
     
     if (outFile){
-        const outFilePath = join(dist,outFile);
+        let outFilePath = outFile as string;
+        if (typeof outFile !== 'string'){
+            outFilePath = extname(dist).length === 0 ? join(dist,"index.d.ts") : dist;
+        }
+
+
         if (dtsBundle){
             const {entry: entity,inlinedLibraries,importedLibraries,allowedTypesLibraries} = (dtsBundle  || {}) as DtsBundleOptions;
-            comd = `npx dts-bundle-generator --out-file ${outFilePath}`;
+            comd = `npx dts-bundle-generator  --no-banner  --out-file ${outFilePath}`;
 
             if (entity){
                 comd += `  ${entity}`;
             }
+
+            
 
             if (inlinedLibraries && inlinedLibraries.length > 0){
                 const inlineArgs = inlinedLibraries!.map(lib=> `  --external-inlines ${lib}`);
