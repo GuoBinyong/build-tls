@@ -119,7 +119,7 @@ export interface Generate_D_TS_Options extends Tsc_d_ts_Options {
 export function generate_d_ts(src:string,dest:string,options?:Generate_D_TS_Options|null){
     const finalOpts = {...options} as Generate_D_TS_Options;
     let {copyDTS,onExit} = finalOpts;
-    copyDTS = copyDTS ?? true;
+    copyDTS = finalOpts.outFile ? false : (copyDTS ?? true);
     onExit = onExit ?? true;
     const {emptyOutDir,dtsBundle} = finalOpts;
     if (dtsBundle){
