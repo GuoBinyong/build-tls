@@ -305,26 +305,71 @@
         {
           "kind": "Interface",
           "canonicalReference": "build-tls!DtsBundleOptions:interface",
-          "docComment": "",
+          "docComment": "/**\n * dts-bundle-generator 的选项，详情请看{@link https://github.com/timocov/dts-bundle-generator}\n */\n",
           "excerptTokens": [
             {
               "kind": "Content",
-              "text": "export interface DtsBundleOptions extends "
-            },
-            {
-              "kind": "Reference",
-              "text": "LibrariesOptions",
-              "canonicalReference": "dts-bundle-generator!LibrariesOptions:interface"
-            },
-            {
-              "kind": "Content",
-              "text": " "
+              "text": "export interface DtsBundleOptions "
             }
           ],
           "releaseTag": "Public",
           "name": "DtsBundleOptions",
           "preserveMemberOrder": false,
           "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "build-tls!DtsBundleOptions#config:member",
+              "docComment": "/**\n * dts-bundle-generator 的配置文件路径\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "config?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string | null"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "config",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "build-tls!DtsBundleOptions#disableSymlinksFollowing:member",
+              "docComment": "/**\n * 禁用将符号链接解析到原始路径。\n *\n * @defaultValue\n *\n * false\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "disableSymlinksFollowing?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean | null"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "disableSymlinksFollowing",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
             {
               "kind": "PropertySignature",
               "canonicalReference": "build-tls!DtsBundleOptions#entry:member",
@@ -351,14 +396,441 @@
                 "startIndex": 1,
                 "endIndex": 2
               }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "build-tls!DtsBundleOptions#exportReferencedTypes:member",
+              "docComment": "/**\n * 默认情况下，所有 `interfaces`、`type` 和 `const enum` 都会被导出。 即使它们没有直接导出，也会导出。该选项允许您可以禁用此行为，以便将导出节点（如果它是）仅从根源文件导出。\n *\n * @defaultValue\n *\n * true\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "exportReferencedTypes?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean | null"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "exportReferencedTypes",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "build-tls!DtsBundleOptions#externalImports:member",
+              "docComment": "/**\n * 来自 node_modules 的包名称数组，用于从中导入类型。\n *\n * @remarks\n *\n * 使用的类型将使用 `import { First, Second } from 'library-name';` 导入。 默认情况下，除了内联库和来自 `@types` 的库之外,其它所有库都将被导入的。\n *\n * @example\n * ```ts\n * [\"type-tls\",\"@gby/deepCopy\"],\n * ```\n *\n * @defaultValue\n *\n * undefined\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "externalImports?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string[] | null"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "externalImports",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "build-tls!DtsBundleOptions#externalInlines:member",
+              "docComment": "/**\n * 从 node_modules 到内联类型的包名称数组。\n *\n * @remarks\n *\n * 使用的类型将内联到输出文件中。\n *\n * @example\n * ```ts\n * [\"type-tls\",\"@gby/deepCopy\"],\n * ```\n *\n * @defaultValue\n *\n * []\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "externalInlines?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string[] | null"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "externalInlines",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "build-tls!DtsBundleOptions#externalTypes:member",
+              "docComment": "/**\n * 来自 `@types` 的包名称数组，用于通过三斜杠引用指令导入类型。\n *\n * @remarks\n *\n * 默认情况下，所有包都是允许的，并将根据它们的用途使用。\n *\n * @example\n * ```ts\n * [\"type-tls\",\"@gby/deepCopy\"],\n * ```\n *\n * @defaultValue\n *\n * undefined\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "externalTypes?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string[] | null"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "externalTypes",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "build-tls!DtsBundleOptions#failOnClass:member",
+              "docComment": "/**\n * 如果生成的 dts 包含类声明则失败\n *\n * @defaultValue\n *\n * false\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "failOnClass?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean | null"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "failOnClass",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "build-tls!DtsBundleOptions#inlineDeclareExternals:member",
+              "docComment": "/**\n * 启用全局模块的 `declare module` 语句的内联，包含在应该被内联的文件中（所有本地文件和来自内联库的包）\n *\n * @remarks\n *\n * 全局模块指的是 `declare module 'external-module' {}`，并不是 `declare module './internal-module' {}`\n *\n * @defaultValue\n *\n * false\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "inlineDeclareExternals?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean | null"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "inlineDeclareExternals",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "build-tls!DtsBundleOptions#inlineDeclareGlobal:member",
+              "docComment": "/**\n * 启用应内联的文件（所有本地文件和内联库中的包）中包含的 `declare global` 语句的内联。  @default false\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "inlineDeclareGlobal?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean | null"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "inlineDeclareGlobal",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "build-tls!DtsBundleOptions#noBanner:member",
+              "docComment": "/**\n * 不在输出文件中生成 `Generated by dts-bundle-generator` 这样的注释\n *\n * @defaultValue\n *\n * true\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "noBanner?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean | null"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "noBanner",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "build-tls!DtsBundleOptions#noCheck:member",
+              "docComment": "/**\n * Skip validation of generated d.ts file\n *\n * @defaultValue\n *\n * false\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "noCheck?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean | null"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "noCheck",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "build-tls!DtsBundleOptions#project:member",
+              "docComment": "/**\n * 使用的 `tsconfig.json` 文件的路径\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "project?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string | null"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "project",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "build-tls!DtsBundleOptions#respectPreserveConstEnum:member",
+              "docComment": "/**\n * 允许从每个直接导出的文件中剥离 `const` 关键字 或重新导出）从入口文件`const enum`\n *\n * @defaultValue\n *\n * false\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "respectPreserveConstEnum?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean | null"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "respectPreserveConstEnum",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "build-tls!DtsBundleOptions#silent:member",
+              "docComment": "/**\n * 禁用除错误之外的任何日志记录\n *\n * @defaultValue\n *\n * false\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "silent?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean | null"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "silent",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "build-tls!DtsBundleOptions#sort:member",
+              "docComment": "/**\n * 按升序对输出节点进行排序。\n *\n * @defaultValue\n *\n * false\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "sort?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean | null"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "sort",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "build-tls!DtsBundleOptions#umdModuleName:member",
+              "docComment": "/**\n * UMD 模块的名称\n *\n * @remarks\n *\n * 如果指定，则将输出 `export as namespace ModuleName;`\n *\n * @defaultValue\n *\n * undefined\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "umdModuleName?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string | null"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "umdModuleName",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "build-tls!DtsBundleOptions#verbose:member",
+              "docComment": "/**\n * Enable verbose logging\n *\n * @defaultValue\n *\n * false\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "verbose?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean | null"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "verbose",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "build-tls!DtsBundleOptions#version:member",
+              "docComment": "/**\n * 显示版本号\n */\n",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "version?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean | null"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isReadonly": false,
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "version",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
             }
           ],
-          "extendsTokenRanges": [
-            {
-              "startIndex": 1,
-              "endIndex": 2
-            }
-          ]
+          "extendsTokenRanges": []
         },
         {
           "kind": "Interface",
@@ -661,7 +1133,7 @@
             {
               "kind": "PropertySignature",
               "canonicalReference": "build-tls!Tsc_d_ts_Options#comArg:member",
-              "docComment": "/**\n * 传给 `tsc` 命令的选项\n *\n * @defaultValue\n *\n * \"\"\n */\n",
+              "docComment": "/**\n * 传给 `tsc` 或 `dts-bundle-generator` 命令的选项\n *\n * @defaultValue\n *\n * \"\"\n */\n",
               "excerptTokens": [
                 {
                   "kind": "Content",

@@ -7,7 +7,6 @@
 /// <reference types="node" />
 
 import { cp } from 'node:fs/promises';
-import type { LibrariesOptions } from 'dts-bundle-generator';
 
 // @public
 export function copy_d_ts(src: string, dest: string, options?: CopyOptions): Promise<void>;
@@ -17,9 +16,27 @@ export type CopyOptions = NonNullable<Parameters<typeof cp>[2]> & {
     exclude?: string[] | null;
 };
 
-// @public (undocumented)
-export interface DtsBundleOptions extends LibrariesOptions {
+// @public
+export interface DtsBundleOptions {
+    config?: string | null;
+    disableSymlinksFollowing?: boolean | null;
     entry?: string | null;
+    exportReferencedTypes?: boolean | null;
+    externalImports?: string[] | null;
+    externalInlines?: string[] | null;
+    externalTypes?: string[] | null;
+    failOnClass?: boolean | null;
+    inlineDeclareExternals?: boolean | null;
+    inlineDeclareGlobal?: boolean | null;
+    noBanner?: boolean | null;
+    noCheck?: boolean | null;
+    project?: string | null;
+    respectPreserveConstEnum?: boolean | null;
+    silent?: boolean | null;
+    sort?: boolean | null;
+    umdModuleName?: string | null;
+    verbose?: boolean | null;
+    version?: boolean | null;
 }
 
 // @public

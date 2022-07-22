@@ -4,7 +4,7 @@
 
 ## Tsc\_d\_ts\_Options.comArg property
 
-传给 `tsc` 命令的选项
+传给 `tsc` 或 `dts-bundle-generator` 命令的选项
 
 <b>Signature:</b>
 

@@ -24,7 +24,7 @@
 
 |  Interface | Description |
 |  --- | --- |
-|  [DtsBundleOptions](./build-tls.dtsbundleoptions.md) |  |
+|  [DtsBundleOptions](./build-tls.dtsbundleoptions.md) | dts-bundle-generator 的选项，详情请看[https://github.com/timocov/dts-bundle-generator](https://github.com/timocov/dts-bundle-generator) |
 |  [Generate\_D\_TS\_Options](./build-tls.generate_d_ts_options.md) | generate\_d\_ts 的选项 |
 |  [Tsc\_d\_ts\_Options](./build-tls.tsc_d_ts_options.md) | tsc\_d\_ts 的选项 |
 
