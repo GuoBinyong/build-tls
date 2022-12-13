@@ -2,9 +2,14 @@
   "name": "build-tls",
   "version": "1.3.11",
   "description": "build-tls 提供了库、项目 构建时常用的工具、函数等",
-  "main": "dist/build-tls.cjs.js",
-  "module": "dist/build-tls.es.js",
+  "main": "./dist/build-tls.cjs.js",
+  "module": "./dist/build-tls.es.js",
+  "exports": {
+    "import": "./dist/build-tls.es.js",
+    "require": "./dist/build-tls.cjs.js"
+  },
   "types": "types/index.d.ts",
+  "type": "commonjs",
   "sideEffects": false,
   "engines": {
     "node": ">=16.7.0"
